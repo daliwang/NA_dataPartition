@@ -3,7 +3,7 @@
 
 batchProccessing.py    : batch processing all the data with pipeline
 
-DataPartion.py         : script to launch actual python jobs
+DataPartition.py         : script to launch actual python jobs
 
 dpFunction.py          : python function read/partition/save netcdf files
  
