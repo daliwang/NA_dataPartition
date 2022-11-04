@@ -1,9 +1,12 @@
 # NA_dataPartition
 
 
-batchProccessing.py    batch processing all the data with pipeline
-DataPartion.py             scripts to launch actual python jobs
-dpFunction.py    python function read/partition/save netcdf files
+batchProccessing.py    
+batch processing all the data with pipeline
+DataPartion.py             
+scripts to launch actual python jobs
+dpFunction.py    
+python function read/partition/save netcdf files
  
 Usage:   
  
