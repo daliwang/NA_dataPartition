@@ -7,9 +7,12 @@ dpFunction.py    python function read/partition/save netcdf files
  
 Usage:   
  
-batch processing       
+batch processing 
+
        python3 batchProcessing.py 
-command line            
+       
+command line:
+
       python3 DataPartition.py <input_path> <output_path> <number_of_subdomains> <i_timesteps>
  
 i_timestep = -1     all the timesteps in a file
