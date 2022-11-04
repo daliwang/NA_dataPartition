@@ -1,0 +1,16 @@
+#!/bin/bash
+#BATCH -A cli144
+#SBATCH -J python
+#SBATCH -N 1
+#SBATCH -p batch
+#SBATCH -t 1:00:00
+
+#### sbatch --export=NONE submit.sl
+
+cd /gpfs/alpine/cli144/proj-shared/wangd/Python4data/code
+date
+
+module load python
+source activate /gpfs/alpine/cli144/proj-shared/wangd/Python4data
+
+nohup python3 DataPartition.py >& batchdata.log &
