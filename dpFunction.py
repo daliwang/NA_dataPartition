@@ -13,30 +13,36 @@ def data_read(file_name, var_name, times):
     # 'NETCDF3_CLASSIC', 'NETCDF3_64BIT', 'NETCDF4_CLASSIC', and 'NETCDF4'
     r_nc_fid = nc.Dataset(file_name, 'r', format='NETCDF4')
 
-    total_rows = r_nc_fid.dimensions['x'].size
-    total_cols = r_nc_fid.dimensions['y'].size
+    total_cols = r_nc_fid.dimensions['x'].size
+    total_rows = r_nc_fid.dimensions['y'].size
     total_timesteps = r_nc_fid.dimensions['time'].size
 
     data = r_nc_fid[var_name][0:times, :, :] # read (timestep, y, x) format
     return total_rows, total_cols, data
 
-def gridId_data(total_rows, total_cols, times, data):
+def gridId_data(total_rows, total_cols, times, data, AOI_mask):
     total_gridcells = total_rows * total_cols
     grid_ids = np.linspace(0, total_gridcells-1, total_gridcells, dtype=int)
 
     # create a mask for land grid_ids (1)
-    mask = data[0]    # FSDS is in (time, Y, X) format
-    mask = np.where(~np.isnan(mask), 1, 0)
+    if (AOI_mask =="") :
+        mask = data[0]    # FSDS is in (time, Y, X) format
+        mask = np.where(~np.isnan(mask), 1, np.nan)
+    else:
+        r_nc_fid = nc.Dataset(AOI_mask, 'r', format='NETCDF4')
+        mask = r_nc_fid['Mask'][:, :] # read mask(y, x) format
+        mask = np.where((mask==30), 1, np.nan)
 
     # create an flattened list of land gridID and reduce the size of gridIDs array
-    grid_ids = grid_ids.reshape(total_cols,total_rows)
+    grid_ids = grid_ids.reshape(total_rows,total_cols)
     grid_ids = np.multiply(mask,grid_ids)
-    grid_ids = grid_ids[grid_ids != 0]
+    grid_ids = grid_ids[~np.isnan(grid_ids)]
 
     # use the size of land gridcells to resize the FSDS matrix
 
     landcells = len(grid_ids)    
     #data1 = np.empty([times, landcells],dtype = float)
+    data = np.multiply(mask, data)
     data = data[~np.isnan(data)]
     data = np.reshape(data,(times,landcells))
     return grid_ids, data
