@@ -122,7 +122,7 @@ def data_save(number_of_subdomains, grid_id_domains, subdomain_path, i_timesteps
         w_nc_fid.close()  # close the new file
 
 def launch_job(input_path, file_name, output_path, var_name, period, \
-               number_of_subdomains, i_timesteps):
+               number_of_subdomains, i_timesteps, AOI_mask):
     file_name = input_path + "/" + file_name  
     start = process_time()
     [total_rows, total_cols, data] = data_read(file_name, var_name, i_timesteps)
@@ -130,7 +130,7 @@ def launch_job(input_path, file_name, output_path, var_name, period, \
     print("Reading " + var_name + " takes  {}".format(end-start))
     
     start = process_time()  
-    [grid_ids, data] = gridId_data(total_rows, total_cols, i_timesteps, data)
+    [grid_ids, data] = gridId_data(total_rows, total_cols, i_timesteps, data, AOI_mask)
     end = process_time()
     print("Creating dense " + var_name + " takes  {}".format(end-start))
 
