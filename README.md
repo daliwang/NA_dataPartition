@@ -15,7 +15,7 @@ batch processing
        
 command line:
 
-      python3 DataPartition.py <input_path> <output_path> <number_of_subdomains> <i_timesteps>
+      python3 DataPartition.py <input_path> <output_path> <number_of_subdomains> <i_timesteps> <AOI_mask>
  
 i_timestep = -1     all the timesteps in a file
 i_timestep >= 1    process few timesteps of data in a file
