@@ -25,7 +25,7 @@ def gridId_data(total_rows, total_cols, times, data, AOI_mask):
     grid_ids = np.linspace(0, total_gridcells-1, total_gridcells, dtype=int)
 
     # create a mask for land grid_ids (1)
-    if (AOI_mask =="") :
+    if (AOI_mask =="NA") :
         mask = data[0]    # FSDS is in (time, Y, X) format
         mask = np.where(~np.isnan(mask), 1, np.nan)
     else:

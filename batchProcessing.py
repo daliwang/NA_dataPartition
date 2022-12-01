@@ -5,8 +5,13 @@ import os, sys, shlex, subprocess
 input_path = "/gpfs/alpine/cli144/proj-shared/NA_dataset/"
 output_path = "/gpfs/alpine/cli144/scratch/wangd/subdomains/"
 test = 1
-fullrun = 0 
-AOI_mask = "/gpfs/alpine/cli144/proj-shared/wangd/Python4data/AOI_mask/AOI_mask_AK.nc"
+fullrun = 0
+full_domain = 0
+
+if full_domain :
+    AOI_mask = "NA"
+else:
+    AOI_mask = "/gpfs/alpine/cli144/proj-shared/wangd/Python4data/AOI_mask/AOI_mask_AK.nc"
 
 def get_dirs(input_path):
     print(input_path)
